@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Videoteka.Data;
+using Videoteka.Data.Abstract;
+using Videoteka.Data.Concrete;
+using Videoteka.Data.Context;
+
 namespace Videoteka.UI
 {
     public class Program
@@ -8,6 +14,11 @@ namespace Videoteka.UI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<CinemaDBContext>(options =>
+                options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+
+            builder.Services.AddTransient<ICinemaRepository, CinemaRepository>();
 
             var app = builder.Build();
 

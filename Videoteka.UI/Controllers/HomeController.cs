@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Videoteka.Data.Abstract;
+using Videoteka.Data.Context;
 using Videoteka.UI.Models;
 
 namespace Videoteka.UI.Controllers
@@ -7,15 +9,18 @@ namespace Videoteka.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICinemaRepository _cinemaRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICinemaRepository cinemaRepository)
         {
             _logger = logger;
+            _cinemaRepository = cinemaRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cinemas = _cinemaRepository.GetAll();
+            return View(cinemas);
         }
 
         public IActionResult Privacy()
