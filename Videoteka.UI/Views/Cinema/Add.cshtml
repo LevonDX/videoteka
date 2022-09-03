@@ -1,0 +1,32 @@
+﻿@using Videoteka.Data;
+@using Videoteka.UI.Models;
+@model CinemaViewModel;
+
+@if (ViewBag.Error != null)
+{
+    <h3 style="color:red"> @ViewBag.Error.ToString() </h3>
+}
+
+<form method="post" >
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="Genre">Genre</label>
+        <select  class="form-control" asp-for="Genre"
+                asp-items="Html.GetEnumSelectList<Genre>()">
+            
+        </select>
+    </div>
+
+    @if (Model.Id == null)
+    {
+        <button class="button" asp-action="Add"> Add </button>
+    }
+    else
+    {    
+        <button class="button" asp-action="Edit"> Edit </button>
+    }
+</form>

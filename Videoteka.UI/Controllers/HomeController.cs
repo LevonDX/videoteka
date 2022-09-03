@@ -9,18 +9,15 @@ namespace Videoteka.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICinemaRepository _cinemaRepository;
 
-        public HomeController(ILogger<HomeController> logger, ICinemaRepository cinemaRepository)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _cinemaRepository = cinemaRepository;
         }
 
         public IActionResult Index()
         {
-            var cinemas = _cinemaRepository.GetAll();
-            return View(cinemas);
+            return View();
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,21 @@
+﻿@using Videoteka.UI.Models
+@model IEnumerable<CinemaViewModel>
+
+<a asp-controller="Cinema" asp-action="Add">Add New Movie</a>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Genre</th>
+    </tr>
+
+    @foreach (CinemaViewModel item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.Name)</td>
+            <td>@Html.DisplayFor(m => item.Genre)</td>
+            <td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+        </tr>
+    }
+
+</table> 
