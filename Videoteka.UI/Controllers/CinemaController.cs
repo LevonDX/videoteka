@@ -79,12 +79,13 @@ namespace Videoteka.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Cinema? cinema = _cinemaRepository.GetById(cinemaViewModel.Id.Value);
+                Cinema? cinema = _cinemaRepository.GetById(cinemaViewModel.Id ?? 0);
 
-                cinema.Name = cinemaViewModel.Name;
+                cinema!.Name = cinemaViewModel.Name;
                 cinema.Genre = cinemaViewModel.Genre;
 
                 _cinemaRepository.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
 
